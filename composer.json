@@ -1,5 +1,5 @@
 {
-    "name": "yu-laravel/laravel-web-tools-core",
+    "name": "yu-laravel/web-tools-core",
     "description": "Shared core for the yu-laravel web tools: SSRF-safe page fetcher, TLS inspector, checklist report, base Livewire tool component and locale resolver.",
     "type": "library",
     "keywords": [
