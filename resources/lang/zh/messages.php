@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'report' => [
         'again' => '重新检查',
