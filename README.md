@@ -16,13 +16,13 @@ You don't need to install it yourself: every tool requires it. Install it direct
 
 | Package | What it checks |
 |---|---|
-| [`yu-laravel/seo-meta-analyzer`](https://github.com/yuriyakishin/seo-meta-analyzer) | Title and meta description, with AI suggestions |
-| [`yu-laravel/webmcp-analyzer`](https://github.com/yuriyakishin/webmcp-analyzer) | Whether a site is ready for AI agents (WebMCP) |
-| [`yu-laravel/link-preview`](https://github.com/yuriyakishin/link-preview) | How a link looks in messengers and social networks |
-| [`yu-laravel/security-check`](https://github.com/yuriyakishin/security-check) | SSL certificate, HTTPS and security headers |
-| [`yu-laravel/schema-validator`](https://github.com/yuriyakishin/schema-validator) | Schema.org structured data and Google rich results |
-| [`yu-laravel/dns-check`](https://github.com/yuriyakishin/dns-check) | DNS and mail records: MX, SPF, DKIM, DMARC, CAA |
-| [`yu-laravel/page-speed`](https://github.com/yuriyakishin/page-speed) | Page speed and Core Web Vitals |
+| [`yu-laravel/laravel-seo-meta-analyzer`](https://github.com/yuriyakishin/laravel-seo-meta-analyzer) | Title and meta description, with AI suggestions |
+| [`yu-laravel/laravel-webmcp-analyzer`](https://github.com/yuriyakishin/laravel-webmcp-analyzer) | Whether a site is ready for AI agents (WebMCP) |
+| [`yu-laravel/laravel-link-preview`](https://github.com/yuriyakishin/laravel-link-preview) | How a link looks in messengers and social networks |
+| [`yu-laravel/laravel-security-check`](https://github.com/yuriyakishin/laravel-security-check) | SSL certificate, HTTPS and security headers |
+| [`yu-laravel/laravel-schema-validator`](https://github.com/yuriyakishin/laravel-schema-validator) | Schema.org structured data and Google rich results |
+| [`yu-laravel/laravel-dns-check`](https://github.com/yuriyakishin/laravel-dns-check) | DNS and mail records: MX, SPF, DKIM, DMARC, CAA |
+| [`yu-laravel/laravel-page-speed`](https://github.com/yuriyakishin/laravel-page-speed) | Page speed and Core Web Vitals |
 
 ## What's inside
 
@@ -42,7 +42,7 @@ You don't need to install it yourself: every tool requires it. Install it direct
 ## Installation
 
 ```bash
-composer require yu-laravel/web-tools-core
+composer require yu-laravel/laravel-web-tools-core
 ```
 
 The service provider is discovered automatically.
@@ -52,7 +52,7 @@ The service provider is discovered automatically.
 The tools don't publish assets. Import the core stylesheet, plus the stylesheet of each tool you use, into your CSS build (Vite, for example):
 
 ```css
-@import "../../vendor/yu-laravel/web-tools-core/resources/css/web-tools-core.css";
+@import "../../vendor/yu-laravel/laravel-web-tools-core/resources/css/web-tools-core.css";
 ```
 
 Every colour and font is a `--wt-*` variable with a neutral default. To match your site, override them on `.wt`:
