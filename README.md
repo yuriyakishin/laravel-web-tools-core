@@ -131,6 +131,14 @@ The tool's config must include `enabled`, `rate_limit.per_hour` and `cache.ttl`.
 
 The core ships 13 translations: cs, de, en, es, fr, it, ja, nl, pl, pt, tr, uk and zh.
 
+## Author
+
+Yuriy Akishin:
+- 🌐 Website: https://yu.net.ua
+- 📧 Email: yuriy.akishin@gmail.com
+- 💼 LinkedIn: https://www.linkedin.com/in/yuriyakishin/
+- 💻 GitHub: https://github.com/yuriyakishin
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
