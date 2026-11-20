@@ -66,6 +66,8 @@ Every colour and font is a `--wt-*` variable with a neutral default. To match yo
 
 The full list is `--wt-accent`, `--wt-accent-dark`, `--wt-accent-soft`, `--wt-bg`, `--wt-surface`, `--wt-raised`, `--wt-text`, `--wt-text-2`, `--wt-muted`, `--wt-line`, `--wt-line-strong`, `--wt-ok`, `--wt-warn`, `--wt-err`, `--wt-terminal`, `--wt-font` and `--wt-mono`.
 
+The tools scroll their forms and results into view. If your site has a fixed header, keep them from hiding under it with `html { scroll-padding-top: 80px; }` (the header's height plus a little room).
+
 ## Configuration
 
 `config/web-tools-core.php` sets how pages are fetched for every tool:

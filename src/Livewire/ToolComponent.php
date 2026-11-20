@@ -41,6 +41,10 @@ abstract class ToolComponent extends Component
     #[Locked]
     public ?string $error = null;
 
+    /** Counts the checks; the report block is keyed by it, so every new report is a new block that scrolls into view. */
+    #[Locked]
+    public int $reportNumber = 0;
+
     abstract protected function name(): string;
 
     abstract protected function locales(): LocaleResolver;
@@ -62,6 +66,7 @@ abstract class ToolComponent extends Component
     public function analyze(): void
     {
         $this->reset('report', 'error');
+        $this->reportNumber++;
 
         $this->validate(
             ['url' => ['required', 'string', 'max:2048']],
