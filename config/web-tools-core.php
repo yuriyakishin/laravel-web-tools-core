@@ -12,4 +12,11 @@ return [
             'Mozilla/5.0 (compatible; YuWebTools/1.0; +https://yu.net.ua/tools)'
         ),
     ],
+
+    /* Prober: many URLs at once (links, images, pages of a site). */
+    'probe' => [
+        'concurrency' => 8,
+        'connect_timeout' => 3,
+        'timeout' => 6,
+    ],
 ];
