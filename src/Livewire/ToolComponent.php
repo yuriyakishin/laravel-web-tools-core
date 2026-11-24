@@ -18,6 +18,7 @@ use Yu\WebToolsCore\Locale\LocaleResolver;
 /**
  * The shell of a web tool: the URL form, the visitor's language, the rate limit, the cache, translated errors
  * and the ToolCheckedEvent. A tool implements run(): check the URL and return the report as an array.
+ * A tool may also name its own event in event(): it is dispatched next to ToolCheckedEvent.
  *
  * The tool name is also its config key and translation namespace: config('{name}.rate_limit.per_hour'),
  * __('{name}::messages.errors.timeout'). An error without the tool's own text uses web-tools-core::messages.errors.
@@ -85,7 +86,7 @@ abstract class ToolComponent extends Component
 
         if (Cache::has($cacheKey)) {
             $this->report = Cache::get($cacheKey);
-            ToolCheckedEvent::dispatch($this->name(), $this->url, $this->locale, $this->report, fromCache: true);
+            $this->checked($this->report, fromCache: true);
 
             return;
         }
@@ -105,7 +106,18 @@ abstract class ToolComponent extends Component
         }
 
         Cache::put($cacheKey, $this->report, (int) config($this->name().'.cache.ttl'));
-        ToolCheckedEvent::dispatch($this->name(), $this->url, $this->locale, $this->report);
+        $this->checked($this->report);
+    }
+
+    /**
+     * The tool's own event, dispatched after every finished check next to ToolCheckedEvent;
+     * its constructor takes (url, locale, report, error, fromCache). Null when the tool has none.
+     *
+     * @return class-string|null
+     */
+    protected function event(): ?string
+    {
+        return null;
     }
 
     protected function isAvailable(): bool
@@ -131,7 +143,21 @@ abstract class ToolComponent extends Component
     private function fail(string $reason, array $replace = []): void
     {
         $this->error = $this->message('errors.'.$reason, $replace);
-        ToolCheckedEvent::dispatch($this->name(), $this->url, $this->locale, error: $reason);
+        $this->checked(error: $reason);
+    }
+
+    /**
+     * Tells the site that a check is over: the report on success, the reason code on failure.
+     *
+     * @param  array<string, mixed>|null  $report
+     */
+    private function checked(?array $report = null, ?string $error = null, bool $fromCache = false): void
+    {
+        ToolCheckedEvent::dispatch($this->name(), $this->url, $this->locale, $report, $error, $fromCache);
+
+        if ($event = $this->event()) {
+            event(new $event($this->url, $this->locale, $report, $error, $fromCache));
+        }
     }
 
     /**

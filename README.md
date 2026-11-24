@@ -83,7 +83,7 @@ The config is not publishable yet. To change a value without an env variable, se
 
 ## Listening to checks
 
-Every checklist tool dispatches `Yu\WebToolsCore\Events\ToolCheckedEvent` after a check, whether it succeeded, failed or came from the cache. SEO Meta Analyzer is the exception: it dispatches its own event. Use the event to log checks or collect statistics:
+Every checklist tool dispatches `Yu\WebToolsCore\Events\ToolCheckedEvent` after a check, whether it succeeded, failed or came from the cache. Next to it each tool dispatches its own event with the same data but without `tool`, e.g. `Yu\DnsCheck\Events\DnsCheckEvent`, to listen to one tool only. SEO Meta Analyzer is the exception: it dispatches only its own events. Use the event to log checks or collect statistics:
 
 ```php
 use Illuminate\Support\Facades\Event;
@@ -128,6 +128,15 @@ class MyToolComponent extends ToolComponent
 ```
 
 The tool's config must include `enabled`, `rate_limit.per_hour` and `cache.ttl`. Error messages are looked up in `my-tool::messages.errors.*` first, then in `web-tools-core::messages.errors.*`.
+
+To give the tool its own event, override `event()` and return its class name. The class takes `(url, locale, report, error, fromCache)` and is dispatched next to `ToolCheckedEvent`:
+
+```php
+protected function event(): string
+{
+    return MyToolEvent::class;
+}
+```
 
 ## Languages
 
